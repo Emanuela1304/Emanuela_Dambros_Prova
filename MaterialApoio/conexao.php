@@ -58,7 +58,8 @@ try {
     // É uma forma simples de lidar com um erro crítico de conexão.
     // Em um ambiente de produção, você poderia querer registrar o erro em um arquivo de log
     // ou mostrar uma mensagem mais amigável para o usuário, sem expor detalhes técnicos.
-    die("Erro de conexão com o banco de dados: " . $e->getMessage());
+    die("Erro de conexão com o banco de
+     dados: " . $e->getMessage());
 }
 
 // Se o script chegar até aqui sem entrar no 'catch', significa que a conexão
