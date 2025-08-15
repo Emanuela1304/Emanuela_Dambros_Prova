@@ -12,7 +12,7 @@ exit();
 $usuario = null;
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    if(!empty($_POST['buscar_usuario'])){
+    if(!empty($_POST['busca_usuario'])){
         $busca = trim($_POST['busca_usuario']);
 
         //verifica se a busca e um numero (id) ou um nome
@@ -23,14 +23,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }else{
             $sql = "SELECT * FROM usuario WHERE nome LIKE :busca_nome";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':busca_nome',"%$busca%",PDO::PARAM_STR);
+            $stmt->bindValue(':busca_nome',"%$busca%",PDO::PARAM_STR);
         }
 
         $stmt->execute();
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
         //Se o usuario nao for encontrado, exibe um alerta
-        if(!usuario){
+        if(!$usuario){
             echo "<script>alert('Usuario nao encontrado');</script>";
         }
     }
@@ -49,7 +49,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
     <h2>Alterar Usuario</h2>
 
-    <form action="alterar_usurio.php" method="POST">
+    <form action="alterar_usuario.php" method="POST">
         <label for="busca_usuario">Digite o nome do usuario</label>
         <input type="text" id="busca_usuario" name="busca_usuario" required onkeyup="buscarSugestoes()">
         
@@ -72,10 +72,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <label for="id_perfil">Perfil:</label>
         <select id="id_perfil" name="id_perfil">
             <option value="1" <?=$usuario['id_perfil'] == 1 ?'select':''?>>Administrador</option>
-            <option value="1" <?=$usuario['id_perfil'] == 2 ?'select':''?>>Secretaria</option>
-            <option value="1" <?=$usuario['id_perfil'] == 3 ?'select':''?>>Amoxarife</option>
+            <option value="2" <?=$usuario['id_perfil'] == 2 ?'select':''?>>Secretaria</option>
+            <option value="3" <?=$usuario['id_perfil'] == 3 ?'select':''?>>Amoxarife</option>
+            <option value="4" <?=$usuario['id_perfil'] == 4 ?'select':''?>>Cliente</option>
             <select>
-
+<!-- se o usuario logado por adm exibir opçao de alterar senha -->
+       <?php if($_SESSION['perfil'] == 1): ?>
+        <label for="nova_senha">Nova Senha</label>
+        <input type="password" id="nova_senha" name="nova_senha">
+        <?php endif; ?>
+        
+        <button type="submit">Alterar</button>
+        <button type="reset">Cancelar</button>
     </form>
+    <?php endif; ?>
+    <a href="principal.php">Voltar</a>
 </body>
 </html>
