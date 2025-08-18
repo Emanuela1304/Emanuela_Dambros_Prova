@@ -10,17 +10,17 @@ if($_SESSION['perfil'] != 1){
 }
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
-    $id_perfil = $_POST['id_perfil'];
+    $nome_prod = $_POST['nome_prod'];
+    $qtde = $_POST['qtde'];
+    $descricao = $_POST['descricao'];
+    $valor_unit = $_POST['valor_unit'];
 
     $sql = "INSERT INTO usuario(nome, email, senha, id_perfil) VALUES (:nome, :email, :senha, :id_perfil)";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(":nome", $nome);
-    $stmt->bindParam(":email", $email);
-    $stmt->bindParam(":senha", $senha);
-    $stmt->bindParam(":id_perfil", $id_perfil, PDO::PARAM_INT);
+    $stmt->bindParam(":nome_prod", $nome_prod);
+    $stmt->bindParam(":qtde", $qtde, PDO::PARAM_INT);
+    $stmt->bindParam(":descricao", $descricao);
+    $stmt->bindParam(":valor_unit", $valor_unit);
     
     
     if($stmt->execute()){
@@ -96,7 +96,7 @@ $opcoes_menu = $permissoes[$id_perfil];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Usuario</title>
+    <title>Cadastrar Produto</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -116,7 +116,7 @@ $opcoes_menu = $permissoes[$id_perfil];
             <?php endforeach; ?>
         </ul>
     </nav>
-    <h2>Cadastrar Usuario</h2>
+    <h2>Cadastrar Produto</h2>
     <form action="cadastro_usuario.php" method="POST">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" required>
