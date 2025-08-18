@@ -15,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $descricao = $_POST['descricao'];
     $valor_unit = $_POST['valor_unit'];
 
-    $sql = "INSERT INTO usuario(nome, email, senha, id_perfil) VALUES (:nome, :email, :senha, :id_perfil)";
+    $sql = "INSERT INTO produto(nome_prod, qtde, descricao, valor_unit) VALUES (:nome, :email, :senha, :id_perfil)";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(":nome_prod", $nome_prod);
     $stmt->bindParam(":qtde", $qtde, PDO::PARAM_INT);
