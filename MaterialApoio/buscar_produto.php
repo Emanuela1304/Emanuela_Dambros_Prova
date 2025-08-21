@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['busca_produto'])) {
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':busca', $busca, PDO::PARAM_INT);
     } else {
-        $sql = "SELECT * FROM produto WHERE produto WHERE nome_prod LIKE :busca_nome ORDER BY nome_prod ASC";
+        $sql = "SELECT * FROM produto WHERE id_produto WHERE nome_prod LIKE :busca_nome ORDER BY nome_prod ASC";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':busca_nome', "$busca%", PDO::PARAM_STR);
     }
@@ -91,7 +91,7 @@ $permissoes = [
 //OBTENDO AS OPCOES DISPONIVEIS PARA O PERFIL LOGADO
 $opcoes_menu = $permissoes[$id_perfil];
 $stmt->execute();
-$usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -133,7 +133,7 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <button type="submit">Confirmar</button>
     </form>
 
-    <?php if(!empty($usuarios)): ?>
+    <?php if(!empty($produto)): ?>
 
         <table class="table">
             <tr>
