@@ -11,22 +11,22 @@ if($_SESSION['perfil'] != 1){
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $nome_prod = $_POST['nome_prod'];
-    $qtde = $_POST['qtde'];
     $descricao = $_POST['descricao'];
+    $qtde = $_POST['qtde'];
     $valor_unit = $_POST['valor_unit'];
 
-    $sql = "INSERT INTO produto(nome_prod, qtde, descricao, valor_unit) VALUES (:nome, :email, :senha, :id_perfil)";
+    $sql = "INSERT INTO produto(nome_prod, descricao, qtde, valor_unit) VALUES (:nome_prod, :descricao, :qtde, :valor_unit)";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(":nome_prod", $nome_prod);
-    $stmt->bindParam(":qtde", $qtde, PDO::PARAM_INT);
     $stmt->bindParam(":descricao", $descricao);
+    $stmt->bindParam(":qtde", $qtde);
     $stmt->bindParam(":valor_unit", $valor_unit);
     
     
     if($stmt->execute()){
-        echo "<script>alert('Usuario Cadastrado Com sucesso');</script>";
+        echo "<script>alert('Produto Cadastrado Com sucesso');</script>";
     }else{
-        echo "<script>alert('Erro, não foi possivel cadastrar o usuario');</script>";
+        echo "<script>alert('Erro, não foi possivel cadastar o produto');</script>";
     }
 }
 $id_perfil = $_SESSION['perfil'];
@@ -117,25 +117,22 @@ $opcoes_menu = $permissoes[$id_perfil];
         </ul>
     </nav>
     <h2>Cadastrar Produto</h2>
-    <form action="cadastro_usuario.php" method="POST">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
+    <form action="cadastro_produto.php" method="POST">
+        <label for="nome_prod">Nome Produto:</label>
+        <input type="text" id="nome_prod" name="nome_prod" required>
 
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" required>
+        <label for="descricao">Descricao:</label>
+        <input type="text" id="descricao" name="descricao" required>
 
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha" required>
+        <label for="qtde">Quantidade:</label>
+        <input type="number" id="qtde" name="qtde" required>
 
-        <label for="id_perfil">Perfil</label>
-        <select name="id_perfil" id="id_perfil">
-            <option value="1">Administrador</option>
-            <option value="2">Secretaria</option>
-            <option value="3">Almoxarife</option>
-            <option value="4">Cliente</option>
-        </select>
+        <label for="valor_unit">Valor Unitario:</label>
+        <input type="number" id="valor_unit" name="valor_unit" required>
 
-        <button type="submit">Salvar</button>
+        
+
+        <button type="submit">Cadastrar</button>
         <button type="reset">Cancelar</button>
     </form>
     
