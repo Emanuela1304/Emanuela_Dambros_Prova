@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] =="POST"){
     $stmt->bindParam(':id_produto',$id_produto);
     
     if($stmt->execute()){
-        echo "<script>alert('Produto atualizado co sucesso!');window.location.href='buscar_usuario.php';</script>";
+        echo "<script>alert('Produto atualizado co sucesso!');window.location.href='buscar_produto.php';</script>";
 
     }else{
         echo "<script>alert('Erro ao atualizar produto');window.location.href=alterar_produto.php?id=$id_produto';</script>";
