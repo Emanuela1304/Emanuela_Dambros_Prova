@@ -130,8 +130,6 @@ $opcoes_menu = $permissoes[$id_perfil];
         <label for="valor_unit">Valor Unitario:</label>
         <input type="number" id="valor_unit" name="valor_unit" required>
 
-        
-
         <button type="submit">Cadastrar</button>
         <button type="reset">Cancelar</button>
     </form>
