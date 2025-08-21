@@ -36,7 +36,7 @@ header {
 }
 
 .logout button {
-    background-color: #d9534f;
+    background-color: #148319;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -46,7 +46,7 @@ header {
 }
 
 .logout button:hover {
-    background-color: #c9302c;
+    background-color: #187a14;
 }
 
 .menu {
@@ -121,7 +121,7 @@ header {
 /* Centraliza o formulário na tela */
 form {
     width: 500px; /* Define uma largura fixa */
-    margin: 50px auto; /* Centraliza na tela */
+    margin: 40px auto; /* Centraliza na tela */
     padding: 20px;
     background-color: #f9f9f9; /* Fundo suave */
     border-radius: 10px; /* Cantos arredondados */
@@ -136,15 +136,16 @@ form {
 label {
     display: block; /* Mantém acima do campo */
     font-weight: bold;
-    margin-bottom: 5px; /* Espaço entre label e campo */
+    margin-bottom: 10px; /* Espaço entre label e campo */
 }
 
 /* Ajusta os campos de entrada */
 input[type="text"],
 input[type="email"],
 input[type="password"],
+input[type="number"],
 select {
-    width: 80%; /* Ocupa toda a largura do formulário */
+    width: 60%; /* Ocupa toda a largura do formulário */
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -154,7 +155,7 @@ select {
 
 /* Ajusta os botões */
 button {
-    width: 80%;
+    width: 50%;
     padding: 10px;
     background-color: #0ca864; /* Azul bonito */
     color: white;
