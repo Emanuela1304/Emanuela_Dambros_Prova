@@ -8,11 +8,11 @@ if ($_SESSION['perfil'] != 1 && $_SESSION['perfil'] != 2) {
     exit();
 }
 
-$produtos = []; //INICIALIZA A VARIAVEL PARA EVITAR ERROS
+$produto = []; //INICIALIZA A VARIAVEL PARA EVITAR ERROS
 
 //SE O FORMULARIO FOR ENVIADO, BUSCA O USUARIO PELO ID OU NOME
-if ($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['busca_produto'])) {
-    $busca = trim($_POST['busca_produto']);
+if ($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['busca'])) {
+    $busca = trim($_POST['busca']);
 
     //VERIFICA SE A BUSCA É UM NUMERO OU NOME
     if (is_numeric($busca)) {
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['busca_produto'])) {
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':busca', $busca, PDO::PARAM_INT);
     } else {
-        $sql = "SELECT * FROM produto WHERE id_produto WHERE nome_prod LIKE :busca_nome ORDER BY nome_prod ASC";
+        $sql = "SELECT * FROM produto WHERE produto WHERE nome_prod LIKE :busca_nome ORDER BY nome_prod ASC";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':busca_nome', "$busca%", PDO::PARAM_STR);
     }
@@ -133,12 +133,12 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <button type="submit">Confirmar</button>
     </form>
 
-    <?php if(!empty($produto)): ?>
+    <?php if(!empty($produtos)): ?>
 
         <table class="table">
             <tr>
                 <th>Nome Produto</th>
-                <th>Descricao</th>
+                <th>Descrição</th>
                 <th>Quantidade</th>
                 <th>Valor Unitario</th>
             </tr>
@@ -148,7 +148,6 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <tr>
                 <td><?=htmlspecialchars($produto['id_produto'])?> </td>
                 <td><?=htmlspecialchars($produto['nome_prod'])?> </td>
-                <td><?=htmlspecialchars($produto['descricao'])?> </td>
                 <td><?=htmlspecialchars($produto['qtde'])?> </td>
                 <td><?=htmlspecialchars($produto['valor_unit'])?> </td>
                 <td>
@@ -160,7 +159,7 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php endforeach;?>
         </table>
         <?php else: ?>
-            <p>Nenhum produto  encontrado.</p>
+            <p>Nenhum produto encontrado.</p>
             <?php endif; ?>
             <a href="principal.php">Voltar</a>
 </body>
