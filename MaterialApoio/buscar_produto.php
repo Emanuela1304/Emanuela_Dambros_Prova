@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['busca'])) {
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':busca', $busca, PDO::PARAM_INT);
     } else {
-        $sql = "SELECT * FROM produto WHERE produto WHERE nome_prod LIKE :busca_nome ORDER BY nome_prod ASC";
+        $sql = "SELECT * FROM produto  WHERE nome_prod LIKE :busca_nome ORDER BY nome_prod ASC";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':busca_nome', "$busca%", PDO::PARAM_STR);
     }
@@ -137,10 +137,13 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <table class="table">
             <tr>
+                <th>ID</th>
                 <th>Nome Produto</th>
                 <th>Descrição</th>
                 <th>Quantidade</th>
                 <th>Valor Unitario</th>
+                <th>Açoes</th>
+                
             </tr>
 
         <?php foreach($produtos as $produto): ?>
@@ -148,8 +151,10 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <tr>
                 <td><?=htmlspecialchars($produto['id_produto'])?> </td>
                 <td><?=htmlspecialchars($produto['nome_prod'])?> </td>
+                <td><?=htmlspecialchars($produto['descricao'])?> </td>
                 <td><?=htmlspecialchars($produto['qtde'])?> </td>
                 <td><?=htmlspecialchars($produto['valor_unit'])?> </td>
+         
                 <td>
                     <a href="alterar_produto.php?id=htmlspecialchars($produto['id_produto'])?>">Alterar</a>
 
