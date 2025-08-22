@@ -65,7 +65,7 @@ $permissoes = [
             "excluir_perfil.php",
             "excluir_cliente.php",
             "excluir_fornecedor.php",
-            "excluir_produto.php",
+            "excluir_produto_copy.php",
             "excluir_funcionario.php"
         ]
     ],
@@ -74,14 +74,14 @@ $permissoes = [
         "Cadastrar" => ["cadastro_cliente.php"],
         "Buscar" => ["buscar_cliente.php", "buscar_fornecedor.php", "buscar_produto.php","buscar_usuario.php"],
         "Alterar" => ["alterar_fornecedor.php", "alterar_produto.php"],
-        "Excluir" => ["excluir_produto.php"]
+        "Excluir" => ["excluir_produto_copy.php"]
     ],
     //almoxarife
     3 => [
         "Cadastrar" => ["cadastro_fornecedor.php", "cadastro_produto.php"],
         "Buscar" => ["buscar_cliente.php", "buscar_fornecedor.php", "buscar_produto.php"],
         "Alterar" => ["alterar_fornecedor.php", "alterar_produto.php"],
-        "Excluir" => ["excluir_produto.php",]
+        "Excluir" => ["excluir_produto_copy.php",]
     ],
     //cliente
     4 => [
@@ -125,6 +125,7 @@ $opcoes_menu = $permissoes[$id_perfil];
     <?php if(!empty($produtos)): ?>
         <table border="1">
         <tr>
+            <td>ID:</td>
             <td>Nome Produto:</td>
             <td>Descrição:</td>
             <td>Quantidade:</td>
@@ -139,7 +140,7 @@ $opcoes_menu = $permissoes[$id_perfil];
             <td><?= htmlspecialchars($produto['qtde'])?></td>
             <td><?= htmlspecialchars($produto['valor_unit'])?></td>
             <td> 
-                <a href="excluir_produto.php?id=<?= htmlspecialchars($produto['id_produto'])?>"onclick="return confirm('tem certeza que deseja excluir produto?')">Excluir</a>
+                <a href="excluir_produto_copy.php?id=<?= htmlspecialchars($produto['id_produto'])?>"onclick="return confirm('tem certeza que deseja excluir produto?')">Excluir</a>
     </td>
         </tr>
         <?php endforeach; ?>
@@ -150,3 +151,4 @@ $opcoes_menu = $permissoes[$id_perfil];
         <a href="principal.php">Voltar</a>
 </body>
 </html>
+
